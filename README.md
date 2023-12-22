@@ -1,9 +1,27 @@
-# A youtube_app Flet app
+# A youtube_App Flet app
+## Requerimientos:
 
-An example of a minimal Flet app.
+1. Crear un entorno virtual con el siguiente comando:
+    ```bash
+    python -m venv env
+    ```
 
-To run the app:
+2. Ejecutar el siguiente comando para instalar las dependencias desde el archivo `requirements.txt`:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-```
-flet run [app_directory]
-```
+3. Activar el entorno virtual:
+    - En Windows:
+        ```bash
+        .\env\Scripts\activate
+        ```
+    - En macOS/Linux:
+        ```bash
+        source env/bin/activate
+        ```
+
+4. Finalmente, ejecutar el siguiente archivo:
+    ```bash
+    python main.py
+    ```
