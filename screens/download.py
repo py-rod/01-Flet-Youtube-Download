@@ -1,6 +1,5 @@
 import flet as ft
 from pytube import YouTube
-from pathlib import Path
 URL = ""
 
 
@@ -47,6 +46,7 @@ class DownloadControls(ft.UserControl):
         self.url = URL
         self.youtube = None
         self.dropdow = None
+        self.file = ft.FilePicker()
         self.set_data_video()
 
     def set_data_video(self):
@@ -82,26 +82,34 @@ class DownloadControls(ft.UserControl):
         )
         return self.dropdow
 
-    def button_download(self):
-        path_download = Path.home() / "Descargas"
+    def button_download(self, e: ft.Page):
+
         if self.dropdow.value == None:
-            self.dropdow.error_text = "Selec a quality"
+            self.dropdow.error_text = "It is necesary to select a quality"
             self.dropdow.update()
 
-        elif self.dropdow.value == "Hight Quality":
-            self.dropdow.error_text = ""
-            self.dropdow.update()
-            self.youtube.streams.get_highest_resolution().download(path_download)
+        else:
+            def save_file(e: ft.FilePickerResultEvent):
+                save_location = e.path
+                if save_location != None and self.dropdow.value == "Hight Quality":
+                    self.dropdow.error_text = ""
+                    self.dropdow.update()
+                    self.youtube.streams.get_highest_resolution().download(save_location)
 
-        elif self.dropdow.value == "Low Quality":
-            self.dropdow.error_text = ""
-            self.dropdow.update()
-            self.youtube.streams.get_lowest_resolution().download(path_download)
+                elif save_location != None and self.dropdow.value == "Low Quality":
+                    self.dropdow.error_text = ""
+                    self.dropdow.update()
+                    self.youtube.streams.get_lowest_resolution().download(save_location)
 
-        elif self.dropdow.value == "Audio":
-            self.dropdow.error_text = ""
-            self.dropdow.update()
-            self.youtube.streams.get_audio_only().download(path_download)
+                elif save_location != None and self.dropdow.value == "Audio":
+                    self.dropdow.error_text = ""
+                    self.dropdow.update()
+                    self.youtube.streams.get_audio_only().download(save_location)
+
+            self.file.on_result = save_file
+            self.file.get_directory_path()
+        e.page.overlay.append(self.file)
+        self.page.update()
 
     def build(self):
 
@@ -130,7 +138,8 @@ class DownloadControls(ft.UserControl):
                                     color="white",
                                     width=200,
                                     height=40,
-                                    on_click=lambda e: self.button_download(),
+                                    on_click=self.button_download,
+                                    icon=ft.icons.DOWNLOAD
 
                                 ),
                             ],

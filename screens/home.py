@@ -39,7 +39,6 @@ class HomeControls(ft.UserControl):
 
         def on_click_bt(e):
             if "https://www.youtube.com" in self.url.value:
-                print("Listo")
                 get_url_input(self.url.value)
                 self.page.go("/second_view")
             else:
