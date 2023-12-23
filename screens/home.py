@@ -2,6 +2,7 @@ import flet as ft
 from screens.download import get_url_input
 
 
+# THIS FUNCTION IS THE RESPONSIBLE FOR WINDOW STYLE
 def window_styles_home(page: ft.Page):  # PAGE STYLES
     page.title = "Youtube Download"
     page.window_max_width = 600
@@ -20,7 +21,7 @@ class HomeControls(ft.UserControl):
         self.logo_yt = None
         self.bt_continue = None
 
-    def image_logo(self):
+    def image_logo(self):  # LOGO YOUTUBE
         self.logo_yt = ft.Image(
             src="../assets/youtube.svg",
             fit=ft.ImageFit.CONTAIN,
@@ -28,14 +29,14 @@ class HomeControls(ft.UserControl):
         )
         return self.logo_yt
 
-    def url_input(self):
+    def url_input(self):  # INPUT FOR THE VIDEO URL
         self.url = ft.TextField(
             hint_text="Put here the url video",
             focused_border_color="white",
         )
         return self.url
 
-    def button_continue(self):
+    def button_continue(self):  # BUTTON CONTINUE FOR THE SECOND VIEW
 
         def on_click_bt(e):
             if "https://www.youtube.com" in self.url.value:
@@ -73,6 +74,7 @@ class HomeControls(ft.UserControl):
         )
 
 
+# THIS CLASS CONTROLLING HOME VIEW AND ROUTE
 class HomeView(ft.View):
     def __init__(self, *args):
         super().__init__()

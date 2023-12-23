@@ -106,10 +106,10 @@ class DownloadControls(ft.UserControl):
                     self.dropdow.update()
                     self.youtube.streams.get_audio_only().download(save_location)
 
+            e.page.overlay.append(self.file)
+            self.page.update()
             self.file.on_result = save_file
             self.file.get_directory_path()
-        e.page.overlay.append(self.file)
-        self.page.update()
 
     def build(self):
 
