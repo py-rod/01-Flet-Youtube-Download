@@ -5,7 +5,6 @@ from screens.download import get_url_input
 # THIS FUNCTION IS THE RESPONSIBLE FOR WINDOW STYLE
 def window_styles_home(page: ft.Page):  # PAGE STYLES
     page.title = "Youtube Download"
-    page.window_max_width = 600
     page.window_max_height = 550
     page.window_width = 600
     page.window_height = 550
@@ -71,6 +70,7 @@ class HomeControls(ft.UserControl):
             ),
             alignment=ft.alignment.center,
             padding=50,
+            width=600
         )
 
 
